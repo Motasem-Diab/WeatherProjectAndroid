@@ -51,7 +51,7 @@ public class ViewProfilesActivity extends AppCompatActivity {
         secondLinearLayout.removeAllViews();
         while (allCustomersCursor.moveToNext()){
             TextView textView =new TextView(ViewProfilesActivity.this);
-            textView.setText( "profile= "+allCustomersCursor.getString(1) +"\ncity= "+allCustomersCursor.getString(2) +"\nAPI= "+allCustomersCursor.getString(3) +"\nunit= "+allCustomersCursor.getString(4)+"\ndefault= "+allCustomersCursor.getString(5) +"\n\n" );
+            textView.setText("ID " + allCustomersCursor.getString(0) + "\nprofile= " + allCustomersCursor.getString(1) + "\ncity= " + allCustomersCursor.getString(2) + "\nAPI= " + allCustomersCursor.getString(3) + "\nunit= " + allCustomersCursor.getString(4) + "\ndefault= " + allCustomersCursor.getString(5) + "\n\n");
             secondLinearLayout.addView(textView);
         }
     }

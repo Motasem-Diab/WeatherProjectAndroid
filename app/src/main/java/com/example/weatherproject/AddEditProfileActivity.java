@@ -13,10 +13,9 @@ import android.widget.Spinner;
 
 
 public class AddEditProfileActivity extends AppCompatActivity {
-    public static long ID =5;
-    DataBaseHelper dataBaseHelper =new
-            DataBaseHelper(AddEditProfileActivity.this,"myDB",null,1);
-
+    public static long ID = 0;
+    DataBaseHelper dataBaseHelper = new
+            DataBaseHelper(AddEditProfileActivity.this, "myDB", null, 1);
 
 
     @Override
