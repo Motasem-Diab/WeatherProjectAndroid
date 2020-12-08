@@ -25,6 +25,7 @@ public class AddEditProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_edit_profile);
 
 
+
         String [] options = {"Celsius","Fahrenheit"};
         final Spinner unitSpinner =(Spinner) findViewById(R.id.unitSpinner);
         ArrayAdapter<String> objUnitArr = new
