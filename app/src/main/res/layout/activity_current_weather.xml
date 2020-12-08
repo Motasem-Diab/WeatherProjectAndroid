@@ -75,6 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:clickable="true"
             android:gravity="center"
             android:text="Min"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -99,5 +100,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="back" />
+
     </LinearLayout>
 </LinearLayout>

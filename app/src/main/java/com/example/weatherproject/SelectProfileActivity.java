@@ -51,8 +51,12 @@ public class SelectProfileActivity extends AppCompatActivity {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Message.message(getApplicationContext(),""+arrayOfString.get(position)+" is the default now");
-                dataBaseHelper.resetAllDefaultExcept(arrayOfIDs.get(position));
+                Message.message(getApplicationContext(),""+arrayOfString.get(position)+" is loaded now");
+                //dataBaseHelper.resetAllDefaultExcept(arrayOfIDs.get(position));
+                Intent intent = new Intent(SelectProfileActivity.this, CurrentWeatherActivity.class);
+                intent.putExtra("ID_to_be_viewd", arrayOfIDs.get(position));
+                SelectProfileActivity.this.startActivity(intent);
+                finish();
             }
         });
 

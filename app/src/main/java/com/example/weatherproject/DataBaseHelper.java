@@ -54,4 +54,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("UPDATE PROFILE SET ISDEFAULT = 1 WHERE ID="+newID);
         db.close();
     }
+
+    public Cursor cursorByID(long newID){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM PROFILE WHERE ID="+newID, null);
+    }
 }
