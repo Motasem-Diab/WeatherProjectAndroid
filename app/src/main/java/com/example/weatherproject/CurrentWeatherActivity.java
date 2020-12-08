@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import java.util.concurrent.ExecutionException;
 
 public class CurrentWeatherActivity extends AppCompatActivity {
 
@@ -23,6 +26,23 @@ public class CurrentWeatherActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
+
+        ConnectionAsyncTask connectionAsyncTask = new ConnectionAsyncTask();//ConnectionAsyncTask connectionAsyncTask = new ConnectionAsyncTask(MainActivity.this);
+        try {
+            String content = connectionAsyncTask.execute("http://api.openweathermap.org/data/2.5/weather?q=Tulkarm&appid=00eabad0a7551c1a4ee094feb3cf3eab").get();
+            //check if the data retrieved or not
+            Log.i("connect",content);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+
 
     }
 }
