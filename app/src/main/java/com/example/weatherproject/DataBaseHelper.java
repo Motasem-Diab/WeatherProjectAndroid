@@ -55,6 +55,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    //return entire row based on  specific row ID
     public Cursor cursorByID(long newID){
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         return sqLiteDatabase.rawQuery("SELECT * FROM PROFILE WHERE ID="+newID, null);

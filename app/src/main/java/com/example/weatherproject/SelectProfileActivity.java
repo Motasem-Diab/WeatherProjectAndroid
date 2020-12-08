@@ -53,6 +53,7 @@ public class SelectProfileActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Message.message(getApplicationContext(),""+arrayOfString.get(position)+" is loaded now");
                 //dataBaseHelper.resetAllDefaultExcept(arrayOfIDs.get(position));
+                //go to Current Weather Activity and send the pressed ID
                 Intent intent = new Intent(SelectProfileActivity.this, CurrentWeatherActivity.class);
                 intent.putExtra("ID_to_be_viewd", arrayOfIDs.get(position));
                 SelectProfileActivity.this.startActivity(intent);

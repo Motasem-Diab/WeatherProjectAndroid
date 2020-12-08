@@ -81,6 +81,7 @@ public class CurrentWeatherActivity extends AppCompatActivity {
             }
             Log.i("main main",weatherMain);
 
+
             //for json obj maintemp
             String tempMin = "", tempMax="" ;
             JSONObject mainTempObj = new JSONObject(maintemp);
