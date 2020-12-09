@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -83,7 +84,7 @@ public class CurrentWeatherActivity extends AppCompatActivity {
 
 
             //for json obj maintemp
-            String tempMin = "", tempMax="" ;
+            String tempMin = "", tempMax = "";
             JSONObject mainTempObj = new JSONObject(maintemp);
             tempMin = mainTempObj.getString("temp_min");
             tempMax = mainTempObj.getString("temp_max");
@@ -91,6 +92,9 @@ public class CurrentWeatherActivity extends AppCompatActivity {
             cityTV.setText(cityName);
             maxTV.setText(tempMax);
             minTV.setText(tempMin);
+
+            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.mainLinearLayoutCurrentWeather);
+            linearLayout.setBackgroundResource(R.drawable.addbackground);
 
 
         } catch (Exception e) {

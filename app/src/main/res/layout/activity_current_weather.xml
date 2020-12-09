@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLinearLayoutCurrentWeather"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CurrentWeatherActivity"
-    android:layout_marginTop="10dp">
+    tools:context=".CurrentWeatherActivity">
 
     <TextView
         android:id="@+id/textView3"
@@ -14,13 +14,14 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Current Weather"
+        android:layout_marginTop="10dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/textView4"
@@ -43,8 +44,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="39dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/textView9"
@@ -87,6 +88,39 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:layout_marginTop="20dp">
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="fill_horizontal"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:text="RadioButton"
+                android:layout_marginLeft="50dp" />
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="152dp"
+                android:layout_height="wrap_content"
+                android:text="RadioButton"
+                tools:layout_conversion_absoluteHeight="32dp"
+                tools:layout_conversion_absoluteWidth="109dp"
+                tools:layout_editor_absoluteX="151dp"
+                tools:layout_editor_absoluteY="235dp" />
+
+        </RadioGroup>
+
     </LinearLayout>
 
     <LinearLayout
