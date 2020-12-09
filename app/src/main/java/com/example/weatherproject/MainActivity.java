@@ -63,15 +63,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button currentProfileButton = (Button) findViewById(R.id.currentProfile);
-        currentProfileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, CurrentWeatherActivity.class);
-                MainActivity.this.startActivity(intent);
-                finish();
-            }
-        });
+
     }
 
 
