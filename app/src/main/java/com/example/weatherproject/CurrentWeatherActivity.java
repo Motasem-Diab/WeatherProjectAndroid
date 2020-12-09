@@ -2,6 +2,7 @@ package com.example.weatherproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -18,34 +20,48 @@ import java.util.concurrent.ExecutionException;
 
 public class CurrentWeatherActivity extends AppCompatActivity {
 
-    DataBaseHelper dataBaseHelper =new
-            DataBaseHelper(CurrentWeatherActivity.this,"myDB",null,1);
+    DataBaseHelper dataBaseHelper = new
+            DataBaseHelper(CurrentWeatherActivity.this, "myDB", null, 1);
+
+    int Celsius = 0;
+    String tempMinC = "", tempMaxC = "", tempMinF = "", tempMaxF = "";
+    TextView maxTV, minTV, cityTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_weather);
 
+        //Define the text views
+        cityTV = (TextView) findViewById(R.id.cityTV);
+        minTV = (TextView) findViewById(R.id.minTV);
+        maxTV = (TextView) findViewById(R.id.maxTV);
+
+        RadioButton rC = (RadioButton) findViewById(R.id.radioCels);
+        RadioButton rF = (RadioButton) findViewById(R.id.radioFahren);
+
+
         //get the id to work on from SelectProfileActivity
-        long ID_to_view = getIntent().getLongExtra("ID_to_be_viewd",1);
+        long ID_to_view = getIntent().getLongExtra("ID_to_be_viewd", 1);
         Cursor cursorById = dataBaseHelper.cursorByID(ID_to_view);
-        //Set the values
-        String cityName="",API="",UNIT="";
-        while (cursorById.moveToNext()){
+        //Get the values from DB
+        String cityName = "", API = "", UNIT = "";
+        while (cursorById.moveToNext()) {
             cityName = cursorById.getString(2);
             API = cursorById.getString(3);
             UNIT = cursorById.getString(4);
         }
         //transform C to metric and F to imperial
-        if(UNIT.equals("Celsius"))
+        if (UNIT.equals("Celsius")) {
             UNIT = "metric";
-        else
+            rC.setChecked(true);
+            Celsius = 1;
+        } else {
             UNIT = "imperial";
+            rF.setChecked(true);
+            Celsius = 0;
+        }
 
-        //Define the text views
-        TextView cityTV = (TextView) findViewById(R.id.cityTV);
-        TextView minTV = (TextView) findViewById(R.id.minTV);
-        TextView maxTV = (TextView) findViewById(R.id.maxTV);
 
         Button backButton = (Button) findViewById(R.id.backCurrent);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -58,9 +74,8 @@ public class CurrentWeatherActivity extends AppCompatActivity {
         });
 
 
-//        String url = "http://api.openweathermap.org/data/2.5/weather?q="+cityName+"&units="+metric+"&appid="+00eabad0a7551c1a4ee094feb3cf3eab";
-        String url = "http://api.openweathermap.org/data/2.5/weather?q="+cityName+"&units="+UNIT+"&appid=" + API;
-        ConnectionAsyncTask connectionAsyncTask = new ConnectionAsyncTask();//ConnectionAsyncTask connectionAsyncTask = new ConnectionAsyncTask(MainActivity.this);
+        String url = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=" + UNIT + "&appid=" + API;
+        ConnectionAsyncTask connectionAsyncTask = new ConnectionAsyncTask();
         try {
             String content = connectionAsyncTask.execute(url).get();
             //check if the data retrieved or not
@@ -76,22 +91,34 @@ public class CurrentWeatherActivity extends AppCompatActivity {
             //weatherData is an array
             JSONArray jsonArray = new JSONArray(weatherData);
             String weatherMain = "";
-            for (int i=0 ; i<jsonArray.length() ; i++){
+            for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject weatherPart = jsonArray.getJSONObject(i);
                 weatherMain = weatherPart.getString("main");
             }
-            Log.i("main main",weatherMain);
+            Log.i("main main", weatherMain);
 
 
             //for json obj maintemp
-            String tempMin = "", tempMax = "";
+
             JSONObject mainTempObj = new JSONObject(maintemp);
-            tempMin = mainTempObj.getString("temp_min");
-            tempMax = mainTempObj.getString("temp_max");
+            if (Celsius == 1) {
+                tempMinC = mainTempObj.getString("temp_min");
+                tempMinF = celsius_Fah(tempMinC);
+                tempMaxC = mainTempObj.getString("temp_max");
+                tempMaxF = celsius_Fah(tempMaxC);
+                maxTV.setText(tempMaxC);
+                minTV.setText(tempMinC);
+            } else {
+                tempMinF = mainTempObj.getString("temp_min");
+                tempMinC = fah_Celsius(tempMinF);
+                tempMaxF = mainTempObj.getString("temp_max");
+                tempMaxC = fah_Celsius(tempMaxF);
+                maxTV.setText(tempMaxF);
+                minTV.setText(tempMinF);
+            }
 
             cityTV.setText(cityName);
-            maxTV.setText(tempMax);
-            minTV.setText(tempMin);
+
 
             LinearLayout linearLayout = (LinearLayout) findViewById(R.id.mainLinearLayoutCurrentWeather);
             linearLayout.setBackgroundResource(R.drawable.addbackground);
@@ -102,10 +129,42 @@ public class CurrentWeatherActivity extends AppCompatActivity {
         }
 
 
+    }
 
 
+    public void radioButtonClick(View view) {
+        boolean checked = ((RadioButton) view).isChecked();
 
+        switch (view.getId()) {
+            case R.id.radioCels:
+                if (checked) {
+                    Message.message(getApplicationContext(), "Celsius selected");
+                    minTV.setText(tempMinC);
+                    maxTV.setText(tempMaxC);
+                }
+                break;
+            case R.id.radioFahren:
+                if (checked) {
+                    Message.message(getApplicationContext(), "Fahrenheit selected");
+                    minTV.setText(tempMinF);
+                    maxTV.setText(tempMaxF);
+                }
+                break;
+        }
 
+    }
 
+    @SuppressLint("DefaultLocale")
+    public String celsius_Fah(String cels) {
+        double cle = Double.parseDouble(cels);
+        double fah = cle * (9.0 / 5.0) + 32;
+        return String.format("%.1f", fah);
+    }
+
+    @SuppressLint("DefaultLocale")
+    public String fah_Celsius(String fahr) {
+        double fah = Double.parseDouble(fahr);
+        double cel = (fah - 32) * (5.0 / 9.0);
+        return String.format("%.1f", cel);
     }
 }

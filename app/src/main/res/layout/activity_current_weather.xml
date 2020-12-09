@@ -49,11 +49,11 @@
 
         <TextView
             android:id="@+id/textView9"
-            android:layout_width="wrap_content"
+            android:layout_width="82dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Max"
+            android:text="Max tempreture"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <TextView
@@ -73,12 +73,12 @@
 
         <TextView
             android:id="@+id/textView11"
-            android:layout_width="wrap_content"
+            android:layout_width="76dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:clickable="true"
             android:gravity="center"
-            android:text="Min"
+            android:text="Min tempreture"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <TextView
@@ -103,21 +103,23 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/radioButton"
-                android:layout_width="160dp"
+                android:id="@+id/radioCels"
+                android:layout_width="166dp"
                 android:layout_height="wrap_content"
-                android:text="RadioButton"
-                android:layout_marginLeft="50dp" />
+                android:layout_marginLeft="60dp"
+                android:text="Celsius"
+                android:onClick="radioButtonClick" />
 
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/radioFahren"
                 android:layout_width="152dp"
                 android:layout_height="wrap_content"
-                android:text="RadioButton"
+                android:text="Fahrenheit"
                 tools:layout_conversion_absoluteHeight="32dp"
                 tools:layout_conversion_absoluteWidth="109dp"
                 tools:layout_editor_absoluteX="151dp"
-                tools:layout_editor_absoluteY="235dp" />
+                tools:layout_editor_absoluteY="235dp"
+                android:onClick="radioButtonClick" />
 
         </RadioGroup>
 
