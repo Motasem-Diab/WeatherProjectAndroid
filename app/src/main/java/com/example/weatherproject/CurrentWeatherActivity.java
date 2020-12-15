@@ -42,7 +42,7 @@ public class CurrentWeatherActivity extends AppCompatActivity {
 
 
         //get the id to work on from SelectProfileActivity
-        long ID_to_view = getIntent().getLongExtra("ID_to_be_viewd", 1);
+        final long ID_to_view = getIntent().getLongExtra("ID_to_be_viewd", 1);
         Cursor cursorById = dataBaseHelper.cursorByID(ID_to_view);
         //Get the values from DB
         String cityName = "", API = "", UNIT = "";
@@ -127,6 +127,46 @@ public class CurrentWeatherActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        Button addnewprofile = (Button) findViewById(R.id.addNewProfileMenu);
+        addnewprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CurrentWeatherActivity.this, AddEditProfileActivity.class);
+                CurrentWeatherActivity.this.startActivity(intent);
+                finish();
+            }
+        });
+
+        Button update = (Button) findViewById(R.id.updateProfile);
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /***needs improvments*/
+                Intent intent = new Intent(CurrentWeatherActivity.this, AddEditProfileActivity.class);
+                CurrentWeatherActivity.this.startActivity(intent);
+                finish();
+            }
+        });
+        Button switchprofile = (Button) findViewById(R.id.switchProfile);
+        switchprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CurrentWeatherActivity.this, SelectProfileActivity.class);
+                CurrentWeatherActivity.this.startActivity(intent);
+                finish();
+            }
+        });
+        Button showfiveDays = (Button) findViewById(R.id.showFiveDays);
+        showfiveDays.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CurrentWeatherActivity.this, FiveDaysForcastActivity.class);
+                intent.putExtra("ID_to_be_viewd", ID_to_view);
+                CurrentWeatherActivity.this.startActivity(intent);
+                finish();
+            }
+        });
 
 
     }
