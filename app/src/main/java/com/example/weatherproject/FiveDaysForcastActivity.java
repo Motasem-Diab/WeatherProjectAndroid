@@ -1,30 +1,39 @@
 package com.example.weatherproject;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintSet;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Shader;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static com.example.weatherproject.R.drawable.addbackground;
+
 public class FiveDaysForcastActivity extends AppCompatActivity {
     DataBaseHelper dataBaseHelper = new
             DataBaseHelper(FiveDaysForcastActivity.this, "myDB", null, 1);
-    ArrayList <String> Days = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_five_days_forcast);
+        Log.i("kos em hek sho3'ol","kos emo");
 
         final long ID_to_view = getIntent().getLongExtra("ID_to_be_viewd", 1);
         Cursor cursorById = dataBaseHelper.cursorByID(ID_to_view);
@@ -34,7 +43,13 @@ public class FiveDaysForcastActivity extends AppCompatActivity {
             API = cursorById.getString(3);
             UNIT = cursorById.getString(4);
         }
-        String url = "api.openweathermap.org/data/2.5/forecast?q="+cityName+"&mode=json&appid="+API;
+        TextView cityNameView = (TextView) findViewById(R.id.cityName);
+        cityNameView.setText(cityName);
+        TextView weather = (TextView) findViewById(R.id.weather);
+        TextView tempMin = (TextView) findViewById(R.id.minTemp);
+        TextView tempMax = (TextView) findViewById(R.id.maxTemp);
+
+        String url = "api.openweathermap.org/data/2.5/forecast?q=Ramallah&mode=json&appid=15e48b3bb06ba849697c993a7776d8a1";
         ConnectionAsyncTask connectionAsyncTask = new ConnectionAsyncTask();
 
         try {
@@ -44,24 +59,30 @@ public class FiveDaysForcastActivity extends AppCompatActivity {
             Log.i("connect",content);
             JSONObject jsonObject = new JSONObject(content);
             JSONArray array = (JSONArray) jsonObject.get("list");
-            for(int i=0 ;i<40 ;i++) {
-                JSONObject newObj = (JSONObject) array.get(i);
-                String str =newObj.get("weather").toString();
-                str = str.substring(1, str.length() - 1);
-                JSONObject lastobj = new JSONObject(str);
-                Days.add(lastobj.getString("main"));
-                Log.i("DAY", lastobj.getString("main"));
-            }
+            JSONObject newObj = (JSONObject) array.get(0);
+            String str =newObj.get("weather").toString();
+            str = str.substring(1, str.length() - 1);
+            Log.i("str:  ", str);
+            JSONObject lastobj = new JSONObject(str);
+            weather.setText(lastobj.getString("main"));
+            str =newObj.get("main").toString();
+            lastobj = new JSONObject(str);
+            tempMin.setText(lastobj.getString("temp_min"));
+            tempMax.setText(lastobj.getString("temp_max"));
+
+//                Days.add(lastobj.getString("main"));
+//                Log.i("DAY", lastobj.getString("main"));
         } catch (Exception e) {
+            Log.i("error", "error found");
             e.printStackTrace();
         }
-
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,
-                R.layout.activity_listview, Days);
-        ListView listview = (ListView) findViewById(R.id.listView1);
-        // listview.setOnItemClickListener(this);
-        listview.setAdapter(adapter);
-
+        LinearLayout fiveDaysLayout = (LinearLayout)findViewById(R.id.FiveDaysLayout);
+//        if (weather.getText().toString().toLowerCase() == "rain")
+//            fiveDaysLayout.setBackground(R.drawable.raining);
+//        else if (weather.getText().toString().toLowerCase() == "sun")
+//            fiveDaysLayout.setBackground(R.drawable.sunny);
+//        else if(weather.getText().toString().toLowerCase() == "cloud")
+//            fiveDaysLayout.setBackground(R.drawable.cloudy);
 
 
 

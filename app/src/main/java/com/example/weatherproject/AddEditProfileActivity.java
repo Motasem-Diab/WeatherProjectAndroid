@@ -13,7 +13,7 @@ import android.widget.Spinner;
 
 
 public class AddEditProfileActivity extends AppCompatActivity {
-    public static long ID = 0;
+    public static long ID = 1;
     DataBaseHelper dataBaseHelper = new
             DataBaseHelper(AddEditProfileActivity.this, "myDB", null, 1);
 

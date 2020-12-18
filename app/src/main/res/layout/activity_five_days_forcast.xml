@@ -2,18 +2,196 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/FiveDaysLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/addbackground"
+    android:background="@drawable/raining"
     android:orientation="vertical"
     tools:context=".FiveDaysForcastActivity">
 
-    <ListView
-        android:id="@+id/listView1"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="381dp" />
+        android:layout_height="393dp">
+
+        <TextView
+            android:id="@+id/day"
+            android:layout_width="65dp"
+            android:layout_height="42dp"
+            android:text="DAY 1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="383dp"
+            android:layout_height="298dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/day">
+
+            <TextView
+                android:id="@+id/cityName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="City name"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="42dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Max Temp : "
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <TextView
+                    android:id="@+id/maxTemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="41dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Min Temp" />
+
+                <TextView
+                    android:id="@+id/minTemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="41dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Weather"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <TextView
+                    android:id="@+id/weather"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="fill_horizontal"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radioCels"
+                        android:layout_width="166dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="60dp"
+                        android:onClick="radioButtonClick"
+                        android:text="Celsius" />
+
+                    <RadioButton
+                        android:id="@+id/radioFahren"
+                        android:layout_width="152dp"
+                        android:layout_height="wrap_content"
+                        android:onClick="radioButtonClick"
+                        android:text="Fahrenheit"
+                        tools:layout_conversion_absoluteHeight="32dp"
+                        tools:layout_conversion_absoluteWidth="109dp"
+                        tools:layout_editor_absoluteX="151dp"
+                        tools:layout_editor_absoluteY="235dp" />
+
+                </RadioGroup>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select a Day:"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:orientation="horizontal">
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radioDay1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Day1" />
+
+                    <RadioButton
+                        android:id="@+id/radioDay2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Day2" />
+
+                    <RadioButton
+                        android:id="@+id/radioDay3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Day3" />
+
+                    <RadioButton
+                        android:id="@+id/radioDay4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Day4" />
+
+                    <RadioButton
+                        android:id="@+id/radioDay5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Day5" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
+        android:id="@+id/MenuLayout"
         android:layout_width="match_parent"
         android:layout_height="339dp"
         android:orientation="horizontal">
