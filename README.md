@@ -5,7 +5,7 @@
 
 update --> what is this ?? 
 
-~~image for weather
+~~image for weather~~
 
 
 handle api error
