@@ -88,20 +88,21 @@ public class FiveDaysForcastActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(FiveDaysForcastActivity.this, CurrentWeatherActivity.class);
+                intent.putExtra("ID_to_be_viewd", ID_to_view);
                 FiveDaysForcastActivity.this.startActivity(intent);
                 finish();
             }
         });
 
-        Button backButton = (Button) findViewById(R.id.backCurrent);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(FiveDaysForcastActivity.this, MainActivity.class);
-                FiveDaysForcastActivity.this.startActivity(intent);
-                finish();
-            }
-        });
+//        Button backButton = (Button) findViewById(R.id.backCurrent);
+//        backButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(FiveDaysForcastActivity.this, MainActivity.class);
+//                FiveDaysForcastActivity.this.startActivity(intent);
+//                finish();
+//            }
+//        });
 
 
     }
@@ -137,63 +138,63 @@ public class FiveDaysForcastActivity extends AppCompatActivity {
                 String MaxMin = lastobj1.getString("temp_max") + "/" + lastobj1.getString("temp_min");
                 if (lastobj.getString("main").toLowerCase().contains("rain") ) {
                     if (i == 0) {
-                        img1.setImageDrawable(getResources().getDrawable(R.drawable.rain));
+                        img1.setImageDrawable(getResources().getDrawable(R.drawable.rainn));
                         temp1.setText(MaxMin);
                     } else if (i == 8) {
-                        img2.setImageDrawable(getResources().getDrawable(R.drawable.rain));
+                        img2.setImageDrawable(getResources().getDrawable(R.drawable.rainn));
                         temp2.setText(MaxMin);
                     } else if (i == 16) {
-                        img3.setImageDrawable(getResources().getDrawable(R.drawable.rain));
+                        img3.setImageDrawable(getResources().getDrawable(R.drawable.rainn));
                         temp3.setText(MaxMin);
                     } else if (i == 24) {
-                        img4.setImageDrawable(getResources().getDrawable(R.drawable.rain));
+                        img4.setImageDrawable(getResources().getDrawable(R.drawable.rainn));
                         temp4.setText(MaxMin);
                     } else if (i == 32) {
-                        img5.setImageDrawable(getResources().getDrawable(R.drawable.rain));
+                        img5.setImageDrawable(getResources().getDrawable(R.drawable.rainn));
                         temp5.setText(MaxMin);
                     }
                 }
                 if (lastobj.getString("main").toLowerCase().contains("clear") ) {
                     if (i == 0){
-                        img1.setImageDrawable(getResources().getDrawable(R.drawable.sun));
+                        img1.setImageDrawable(getResources().getDrawable(R.drawable.sunnn));
                         temp1.setText(MaxMin);
                     }
                     else if (i == 8){
-                        img2.setImageDrawable(getResources().getDrawable(R.drawable.sun));
+                        img2.setImageDrawable(getResources().getDrawable(R.drawable.sunnn));
                         temp2.setText(MaxMin);
                     }
                     else if (i == 16){
-                        img3.setImageDrawable(getResources().getDrawable(R.drawable.sun));
+                        img3.setImageDrawable(getResources().getDrawable(R.drawable.sunnn));
                         temp3.setText(MaxMin);
                     }
                     else if (i == 24){
-                        img4.setImageDrawable(getResources().getDrawable(R.drawable.sun));
+                        img4.setImageDrawable(getResources().getDrawable(R.drawable.sunnn));
                         temp4.setText(MaxMin);
                     }
                     else if (i == 32){
-                        img5.setImageDrawable(getResources().getDrawable(R.drawable.sun));
+                        img5.setImageDrawable(getResources().getDrawable(R.drawable.sunnn));
                         temp5.setText(MaxMin);
                     }
                 }
                 if (lastobj.getString("main").toLowerCase().contains("clouds") ) {
                     if (i == 0){
-                        img1.setImageDrawable(getResources().getDrawable(R.drawable.cloud));
+                        img1.setImageDrawable(getResources().getDrawable(R.drawable.cloudd));
                         temp1.setText(MaxMin);
                     }
                     else if (i == 8){
-                        img2.setImageDrawable(getResources().getDrawable(R.drawable.cloud));
+                        img2.setImageDrawable(getResources().getDrawable(R.drawable.cloudd));
                         temp2.setText(MaxMin);
                     }
                     else if (i == 16){
-                        img3.setImageDrawable(getResources().getDrawable(R.drawable.cloud));
+                        img3.setImageDrawable(getResources().getDrawable(R.drawable.cloudd));
                         temp3.setText(MaxMin);
                     }
                     else if (i == 24){
-                        img4.setImageDrawable(getResources().getDrawable(R.drawable.cloud));
+                        img4.setImageDrawable(getResources().getDrawable(R.drawable.cloudd));
                         temp4.setText(MaxMin);
                     }
                     else if (i == 32){
-                        img5.setImageDrawable(getResources().getDrawable(R.drawable.cloud));
+                        img5.setImageDrawable(getResources().getDrawable(R.drawable.cloudd));
                         temp5.setText(MaxMin);
                     }
                 }
