@@ -47,6 +47,7 @@ public class FiveDaysForcastActivity extends AppCompatActivity {
             rF.setChecked(true);
             Celsius = 0;
         }
+//        commit
         TextView cityNameView = (TextView) findViewById(R.id.cityName);
         cityNameView.setText(cityName);
         ImageView img1 = (ImageView) findViewById(R.id.imageView1);
