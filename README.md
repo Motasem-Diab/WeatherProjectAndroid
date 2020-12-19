@@ -1,8 +1,17 @@
 # WeatherProjectAndroid
 
-show 5 days
-update 
-image for weather
+~~show 5 days~~
+
+
+update --> what is this ?? 
+
+~~image for weather
+
+
 handle api error
+
+
 color button
-main
+
+
+main  --> what is this ?? 
