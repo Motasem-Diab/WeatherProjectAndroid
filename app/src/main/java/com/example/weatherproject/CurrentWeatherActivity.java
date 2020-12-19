@@ -121,7 +121,13 @@ public class CurrentWeatherActivity extends AppCompatActivity {
 
 
             LinearLayout linearLayout = (LinearLayout) findViewById(R.id.mainLinearLayoutCurrentWeather);
-            linearLayout.setBackgroundResource(R.drawable.addbackground);
+            if (weatherMain.toLowerCase() == "rain")
+                linearLayout.setBackgroundResource(R.drawable.raining);
+            else if (weatherMain.toLowerCase() == "clear")
+                linearLayout.setBackgroundResource(R.drawable.sunny);
+            else if(weatherMain.toLowerCase() == "clouds")
+                linearLayout.setBackgroundResource(R.drawable.cloudy);
+//            linearLayout.setBackgroundResource(R.drawable.addbackground);
 
 
         } catch (Exception e) {

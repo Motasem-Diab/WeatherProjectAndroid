@@ -5,7 +5,7 @@
     android:id="@+id/FiveDaysLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/raining"
+    android:background="@drawable/addbackground"
     android:orientation="vertical"
     tools:context=".FiveDaysForcastActivity">
 
@@ -14,10 +14,10 @@
         android:layout_height="393dp">
 
         <TextView
-            android:id="@+id/day"
-            android:layout_width="65dp"
-            android:layout_height="42dp"
-            android:text="DAY 1"
+            android:id="@+id/1"
+            android:layout_width="222dp"
+            android:layout_height="38dp"
+            android:text="5 DAYS FORCAST"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +29,7 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/day">
+            app:layout_constraintTop_toBottomOf="@+id/1">
 
             <TextView
                 android:id="@+id/cityName"
@@ -41,67 +41,164 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="43dp"
+                android:background="#FFFFFF"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView12"
-                    android:layout_width="42dp"
-                    android:layout_height="match_parent"
+                    android:id="@+id/textView22"
+                    android:layout_width="77dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Max Temp : "
+                    android:text="Day1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                 <TextView
-                    android:id="@+id/maxTemp"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/temp1"
+                    android:layout_width="54dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="MAX/MIN"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="82dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                    app:srcCompat="@drawable/sun" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:background="#F3FFFFFF"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textView14"
-                    android:layout_width="41dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="14dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Min Temp" />
+                    android:text="Day2"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                 <TextView
-                    android:id="@+id/minTemp"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/temp2"
+                    android:layout_width="94dp"
+                    android:layout_height="wrap_content"
+                    android:text="MAX/MIN"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="37dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/rain" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
+                android:background="#DAFFFFFF"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textView17"
-                    android:layout_width="41dp"
+                    android:layout_width="186dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Weather"
+                    android:text="Day3"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                 <TextView
-                    android:id="@+id/weather"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/temp3"
+                    android:layout_width="152dp"
                     android:layout_height="35dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:text="MAX/MIN"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="208dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/cloud" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="39dp"
+                android:background="#BEFFFFFF"
                 android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="208dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Day4"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <TextView
+                    android:id="@+id/temp4"
+                    android:layout_width="173dp"
+                    android:layout_height="39dp"
+                    android:layout_weight="1"
+                    android:text="MAX/MIN"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/rain" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="#7EFFFFFF"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView25"
+                    android:layout_width="172dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Day5"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <TextView
+                    android:id="@+id/temp5"
+                    android:layout_width="148dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="MAX/MIN"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="180dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/sun" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView27"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Choose a Unit:"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
                 <RadioGroup
                     android:id="@+id/radioGroup"
@@ -132,62 +229,8 @@
                 </RadioGroup>
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView21"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Select a Day:"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="42dp"
-                android:orientation="horizontal">
-
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/radioDay1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Day1" />
-
-                    <RadioButton
-                        android:id="@+id/radioDay2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Day2" />
-
-                    <RadioButton
-                        android:id="@+id/radioDay3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Day3" />
-
-                    <RadioButton
-                        android:id="@+id/radioDay4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Day4" />
-
-                    <RadioButton
-                        android:id="@+id/radioDay5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Day5" />
-                </RadioGroup>
-
-            </LinearLayout>
-
         </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout

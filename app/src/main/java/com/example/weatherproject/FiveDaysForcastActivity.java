@@ -1,41 +1,36 @@
 package com.example.weatherproject;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintSet;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Shader;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
-import static com.example.weatherproject.R.drawable.addbackground;
+import java.util.concurrent.ExecutionException;
 
 public class FiveDaysForcastActivity extends AppCompatActivity {
     DataBaseHelper dataBaseHelper = new
             DataBaseHelper(FiveDaysForcastActivity.this, "myDB", null, 1);
+    int Celsius = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_five_days_forcast);
-        Log.i("kos em hek sho3'ol","kos emo");
-
         final long ID_to_view = getIntent().getLongExtra("ID_to_be_viewd", 1);
+        RadioButton rC = (RadioButton) findViewById(R.id.radioCels);
+        RadioButton rF = (RadioButton) findViewById(R.id.radioFahren);
         Cursor cursorById = dataBaseHelper.cursorByID(ID_to_view);
         String cityName = "", API = "", UNIT = "";
         while (cursorById.moveToNext()) {
@@ -43,59 +38,108 @@ public class FiveDaysForcastActivity extends AppCompatActivity {
             API = cursorById.getString(3);
             UNIT = cursorById.getString(4);
         }
+        if (UNIT.equals("Celsius")) {
+            UNIT = "metric";
+            rC.setChecked(true);
+            Celsius = 1;
+        } else {
+            UNIT = "imperial";
+            rF.setChecked(true);
+            Celsius = 0;
+        }
         TextView cityNameView = (TextView) findViewById(R.id.cityName);
         cityNameView.setText(cityName);
-        TextView weather = (TextView) findViewById(R.id.weather);
-        TextView tempMin = (TextView) findViewById(R.id.minTemp);
-        TextView tempMax = (TextView) findViewById(R.id.maxTemp);
+        ImageView img1 = (ImageView) findViewById(R.id.imageView1);
+        ImageView img2 = (ImageView) findViewById(R.id.imageView2);
+        ImageView img3 = (ImageView) findViewById(R.id.imageView3);
+        ImageView img4 = (ImageView) findViewById(R.id.imageView4);
+        ImageView img5 = (ImageView) findViewById(R.id.imageView5);
+        TextView temp1 = (TextView) findViewById(R.id.temp1);
+        TextView temp2 = (TextView) findViewById(R.id.temp2);
+        TextView temp3 = (TextView) findViewById(R.id.temp3);
+        TextView temp4 = (TextView) findViewById(R.id.temp4);
+        TextView temp5 = (TextView) findViewById(R.id.temp5);
 
-        String url = "api.openweathermap.org/data/2.5/forecast?q=Ramallah&mode=json&appid=15e48b3bb06ba849697c993a7776d8a1";
+
+        String url = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&mode=json&appid=" + API + "&units=" + UNIT;
         ConnectionAsyncTask connectionAsyncTask = new ConnectionAsyncTask();
 
         try {
-
             String content = connectionAsyncTask.execute(url).get();
             //check if the data retrieved or not
-            Log.i("connect",content);
-            JSONObject jsonObject = new JSONObject(content);
-            JSONArray array = (JSONArray) jsonObject.get("list");
-            JSONObject newObj = (JSONObject) array.get(0);
-            String str =newObj.get("weather").toString();
-            str = str.substring(1, str.length() - 1);
-            Log.i("str:  ", str);
-            JSONObject lastobj = new JSONObject(str);
-            weather.setText(lastobj.getString("main"));
-            str =newObj.get("main").toString();
-            lastobj = new JSONObject(str);
-            tempMin.setText(lastobj.getString("temp_min"));
-            tempMax.setText(lastobj.getString("temp_max"));
+            Log.i("connect", content);
+            for (int i = 0; i < 40; i += 8) {
+                JSONObject jsonObject = new JSONObject(content);
+                JSONArray array = (JSONArray) jsonObject.get("list");
+                JSONObject newObj = (JSONObject) array.get(i);
+                String str = newObj.get("weather").toString();
+                str = str.substring(1, str.length() - 1);
+                Log.i("str:  ", str);
+                JSONObject lastobj = new JSONObject(str);
+                str = newObj.get("main").toString();
+                JSONObject lastobj1 = new JSONObject(str);
+                String MaxMin = lastobj1.getString("temp_max") + "/" + lastobj1.getString("temp_min");
+                if (lastobj.getString("main").toLowerCase() == "rain") {
+                    if (i == 0) {
+                        img1.setImageDrawable(getResources().getDrawable(R.drawable.rain));
+                        temp1.setText(MaxMin);
+
+                    } else if (i == 8) {
+                        img2.setImageDrawable(getResources().getDrawable(R.drawable.rain));
+                        temp2.setText(MaxMin);
+                    } else if (i == 16) {
+                        img3.setImageDrawable(getResources().getDrawable(R.drawable.rain));
+                        temp3.setText(MaxMin);
+                    } else if (i == 24) {
+                        img4.setImageDrawable(getResources().getDrawable(R.drawable.rain));
+                        temp4.setText(MaxMin);
+                    } else if (i == 32) {
+                        img5.setImageDrawable(getResources().getDrawable(R.drawable.rain));
+                        temp5.setText(MaxMin);
+                    }
+                }
+                if (lastobj.getString("main").toLowerCase() == "clear") {
+                    if (i == 0)
+                        img1.setImageDrawable(getResources().getDrawable(R.drawable.sun));
+                    else if (i == 8)
+                        img2.setImageDrawable(getResources().getDrawable(R.drawable.sun));
+                    else if (i == 16)
+                        img3.setImageDrawable(getResources().getDrawable(R.drawable.sun));
+                    else if (i == 24)
+                        img4.setImageDrawable(getResources().getDrawable(R.drawable.sun));
+                    else if (i == 32)
+                        img5.setImageDrawable(getResources().getDrawable(R.drawable.sun));
+                }
+                if (lastobj.getString("main").toLowerCase() == "clouds") {
+                    if (i == 0)
+                        img1.setImageDrawable(getResources().getDrawable(R.drawable.cloud));
+                    else if (i == 8)
+                        img2.setImageDrawable(getResources().getDrawable(R.drawable.cloud));
+                    else if (i == 16)
+                        img3.setImageDrawable(getResources().getDrawable(R.drawable.cloud));
+                    else if (i == 24)
+                        img4.setImageDrawable(getResources().getDrawable(R.drawable.cloud));
+                    else if (i == 32)
+                        img5.setImageDrawable(getResources().getDrawable(R.drawable.cloud));
+                }
+
 
 //                Days.add(lastobj.getString("main"));
-//                Log.i("DAY", lastobj.getString("main"));
+                Log.i("DAY", lastobj.getString("main"));
+            }
         } catch (Exception e) {
             Log.i("error", "error found");
             e.printStackTrace();
         }
-        LinearLayout fiveDaysLayout = (LinearLayout)findViewById(R.id.FiveDaysLayout);
+
+//        LinearLayout fiveDaysLayout = (LinearLayout)findViewById(R.id.FiveDaysLayout);
+////        weather.setText("rain");
 //        if (weather.getText().toString().toLowerCase() == "rain")
-//            fiveDaysLayout.setBackground(R.drawable.raining);
-//        else if (weather.getText().toString().toLowerCase() == "sun")
-//            fiveDaysLayout.setBackground(R.drawable.sunny);
-//        else if(weather.getText().toString().toLowerCase() == "cloud")
-//            fiveDaysLayout.setBackground(R.drawable.cloudy);
-
-
-
-
-
-
-
-
-
-
-
-
-
+//            fiveDaysLayout.setBackgroundResource(R.drawable.raining);
+//        else if (weather.getText().toString().toLowerCase() == "clear")
+//            fiveDaysLayout.setBackgroundResource(R.drawable.sunny);
+//        else if(weather.getText().toString().toLowerCase() == "clouds")
+//            fiveDaysLayout.setBackgroundResource(R.drawable.cloudy);
 
 
         //Menu
