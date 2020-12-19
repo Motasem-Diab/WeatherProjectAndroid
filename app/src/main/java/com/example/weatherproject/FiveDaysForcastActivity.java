@@ -79,7 +79,7 @@ public class FiveDaysForcastActivity extends AppCompatActivity {
                 str = newObj.get("main").toString();
                 JSONObject lastobj1 = new JSONObject(str);
                 String MaxMin = lastobj1.getString("temp_max") + "/" + lastobj1.getString("temp_min");
-                if (lastobj.getString("main").toLowerCase() == "rain") {
+                if (lastobj.getString("main").toLowerCase().contains("rain") ) {
                     if (i == 0) {
                         img1.setImageDrawable(getResources().getDrawable(R.drawable.rain));
                         temp1.setText(MaxMin);
@@ -98,29 +98,49 @@ public class FiveDaysForcastActivity extends AppCompatActivity {
                         temp5.setText(MaxMin);
                     }
                 }
-                if (lastobj.getString("main").toLowerCase() == "clear") {
-                    if (i == 0)
+                if (lastobj.getString("main").toLowerCase().contains("clear") ) {
+                    if (i == 0){
                         img1.setImageDrawable(getResources().getDrawable(R.drawable.sun));
-                    else if (i == 8)
+                        temp1.setText(MaxMin);
+                    }
+                    else if (i == 8){
                         img2.setImageDrawable(getResources().getDrawable(R.drawable.sun));
-                    else if (i == 16)
+                        temp2.setText(MaxMin);
+                    }
+                    else if (i == 16){
                         img3.setImageDrawable(getResources().getDrawable(R.drawable.sun));
-                    else if (i == 24)
+                        temp3.setText(MaxMin);
+                    }
+                    else if (i == 24){
                         img4.setImageDrawable(getResources().getDrawable(R.drawable.sun));
-                    else if (i == 32)
+                        temp4.setText(MaxMin);
+                    }
+                    else if (i == 32){
                         img5.setImageDrawable(getResources().getDrawable(R.drawable.sun));
+                        temp5.setText(MaxMin);
+                    }
                 }
-                if (lastobj.getString("main").toLowerCase() == "clouds") {
-                    if (i == 0)
+                if (lastobj.getString("main").toLowerCase().contains("clouds") ) {
+                    if (i == 0){
                         img1.setImageDrawable(getResources().getDrawable(R.drawable.cloud));
-                    else if (i == 8)
+                        temp1.setText(MaxMin);
+                    }
+                    else if (i == 8){
                         img2.setImageDrawable(getResources().getDrawable(R.drawable.cloud));
-                    else if (i == 16)
+                        temp2.setText(MaxMin);
+                    }
+                    else if (i == 16){
                         img3.setImageDrawable(getResources().getDrawable(R.drawable.cloud));
-                    else if (i == 24)
+                        temp3.setText(MaxMin);
+                    }
+                    else if (i == 24){
                         img4.setImageDrawable(getResources().getDrawable(R.drawable.cloud));
-                    else if (i == 32)
+                        temp4.setText(MaxMin);
+                    }
+                    else if (i == 32){
                         img5.setImageDrawable(getResources().getDrawable(R.drawable.cloud));
+                        temp5.setText(MaxMin);
+                    }
                 }
 
 
