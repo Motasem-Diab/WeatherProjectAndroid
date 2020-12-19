@@ -116,23 +116,26 @@ public class CurrentWeatherActivity extends AppCompatActivity {
                 maxTV.setText(tempMaxF);
                 minTV.setText(tempMinF);
             }
+            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.mainLinearLayoutCurrentWeather);
+            if (weatherMain.toLowerCase().contains("rain"))
+                linearLayout.setBackgroundResource(R.drawable.raining);
+            else if (weatherMain.toLowerCase().contains("clear"))
+                linearLayout.setBackgroundResource(R.drawable.sunny);
+            else if(weatherMain.toLowerCase().contains("clouds"))
+                linearLayout.setBackgroundResource(R.drawable.cloudy);
+
 
             cityTV.setText(cityName);
 
 
-            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.mainLinearLayoutCurrentWeather);
-            if (weatherMain.toLowerCase() == "rain")
-                linearLayout.setBackgroundResource(R.drawable.raining);
-            else if (weatherMain.toLowerCase() == "clear")
-                linearLayout.setBackgroundResource(R.drawable.sunny);
-            else if(weatherMain.toLowerCase() == "clouds")
-                linearLayout.setBackgroundResource(R.drawable.cloudy);
-//            linearLayout.setBackgroundResource(R.drawable.addbackground);
-
+//
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
+
 
         Button addnewprofile = (Button) findViewById(R.id.addNewProfileMenu);
         addnewprofile.setOnClickListener(new View.OnClickListener() {

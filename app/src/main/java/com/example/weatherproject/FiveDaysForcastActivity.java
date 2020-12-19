@@ -23,6 +23,7 @@ public class FiveDaysForcastActivity extends AppCompatActivity {
     DataBaseHelper dataBaseHelper = new
             DataBaseHelper(FiveDaysForcastActivity.this, "myDB", null, 1);
     int Celsius = 1;
+    String cityName = "", API = "", UNIT = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,7 @@ public class FiveDaysForcastActivity extends AppCompatActivity {
         RadioButton rC = (RadioButton) findViewById(R.id.radioCels);
         RadioButton rF = (RadioButton) findViewById(R.id.radioFahren);
         Cursor cursorById = dataBaseHelper.cursorByID(ID_to_view);
-        String cityName = "", API = "", UNIT = "";
+
         while (cursorById.moveToNext()) {
             cityName = cursorById.getString(2);
             API = cursorById.getString(3);
@@ -47,9 +48,64 @@ public class FiveDaysForcastActivity extends AppCompatActivity {
             rF.setChecked(true);
             Celsius = 0;
         }
-//        commit
         TextView cityNameView = (TextView) findViewById(R.id.cityName);
         cityNameView.setText(cityName);
+        connectAndView(cityName,API,UNIT);
+
+
+        //Menu
+        Button addnewprofile = (Button) findViewById(R.id.addNewProfileMenu);
+        addnewprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(FiveDaysForcastActivity.this, AddEditProfileActivity.class);
+                FiveDaysForcastActivity.this.startActivity(intent);
+                finish();
+            }
+        });
+
+        Button update = (Button) findViewById(R.id.updateProfile);
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /***needs improvments*/
+                Intent intent = new Intent(FiveDaysForcastActivity.this, AddEditProfileActivity.class);
+                FiveDaysForcastActivity.this.startActivity(intent);
+                finish();
+            }
+        });
+        Button switchprofile = (Button) findViewById(R.id.switchProfile);
+        switchprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(FiveDaysForcastActivity.this, SelectProfileActivity.class);
+                FiveDaysForcastActivity.this.startActivity(intent);
+                finish();
+            }
+        });
+        Button currentweather = (Button) findViewById(R.id.showFiveDays);
+        currentweather.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(FiveDaysForcastActivity.this, CurrentWeatherActivity.class);
+                FiveDaysForcastActivity.this.startActivity(intent);
+                finish();
+            }
+        });
+
+        Button backButton = (Button) findViewById(R.id.backCurrent);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(FiveDaysForcastActivity.this, MainActivity.class);
+                FiveDaysForcastActivity.this.startActivity(intent);
+                finish();
+            }
+        });
+
+
+    }
+    void connectAndView (String cityName,String API,String UNIT){
         ImageView img1 = (ImageView) findViewById(R.id.imageView1);
         ImageView img2 = (ImageView) findViewById(R.id.imageView2);
         ImageView img3 = (ImageView) findViewById(R.id.imageView3);
@@ -60,7 +116,6 @@ public class FiveDaysForcastActivity extends AppCompatActivity {
         TextView temp3 = (TextView) findViewById(R.id.temp3);
         TextView temp4 = (TextView) findViewById(R.id.temp4);
         TextView temp5 = (TextView) findViewById(R.id.temp5);
-
 
         String url = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&mode=json&appid=" + API + "&units=" + UNIT;
         ConnectionAsyncTask connectionAsyncTask = new ConnectionAsyncTask();
@@ -84,7 +139,6 @@ public class FiveDaysForcastActivity extends AppCompatActivity {
                     if (i == 0) {
                         img1.setImageDrawable(getResources().getDrawable(R.drawable.rain));
                         temp1.setText(MaxMin);
-
                     } else if (i == 8) {
                         img2.setImageDrawable(getResources().getDrawable(R.drawable.rain));
                         temp2.setText(MaxMin);
@@ -153,66 +207,25 @@ public class FiveDaysForcastActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-//        LinearLayout fiveDaysLayout = (LinearLayout)findViewById(R.id.FiveDaysLayout);
-////        weather.setText("rain");
-//        if (weather.getText().toString().toLowerCase() == "rain")
-//            fiveDaysLayout.setBackgroundResource(R.drawable.raining);
-//        else if (weather.getText().toString().toLowerCase() == "clear")
-//            fiveDaysLayout.setBackgroundResource(R.drawable.sunny);
-//        else if(weather.getText().toString().toLowerCase() == "clouds")
-//            fiveDaysLayout.setBackgroundResource(R.drawable.cloudy);
+    }
+    public void radioButtonClick(View view) {
+        boolean checked = ((RadioButton) view).isChecked();
 
+        switch (view.getId()) {
+            case R.id.radioCels:
+                if (checked) {
+                    Message.message(getApplicationContext(), "Celsius selected");
+                   connectAndView(cityName,API,"metric");
+                }
+                break;
+            case R.id.radioFahren:
+                if (checked) {
+                    Message.message(getApplicationContext(), "Fahrenheit selected");
+                    connectAndView(cityName,API,"imperial");
 
-        //Menu
-        Button addnewprofile = (Button) findViewById(R.id.addNewProfileMenu);
-        addnewprofile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(FiveDaysForcastActivity.this, AddEditProfileActivity.class);
-                FiveDaysForcastActivity.this.startActivity(intent);
-                finish();
-            }
-        });
-
-        Button update = (Button) findViewById(R.id.updateProfile);
-        update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /***needs improvments*/
-                Intent intent = new Intent(FiveDaysForcastActivity.this, AddEditProfileActivity.class);
-                FiveDaysForcastActivity.this.startActivity(intent);
-                finish();
-            }
-        });
-        Button switchprofile = (Button) findViewById(R.id.switchProfile);
-        switchprofile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(FiveDaysForcastActivity.this, SelectProfileActivity.class);
-                FiveDaysForcastActivity.this.startActivity(intent);
-                finish();
-            }
-        });
-        Button currentweather = (Button) findViewById(R.id.showFiveDays);
-        currentweather.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(FiveDaysForcastActivity.this, CurrentWeatherActivity.class);
-                FiveDaysForcastActivity.this.startActivity(intent);
-                finish();
-            }
-        });
-
-        Button backButton = (Button) findViewById(R.id.backCurrent);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(FiveDaysForcastActivity.this, MainActivity.class);
-                FiveDaysForcastActivity.this.startActivity(intent);
-                finish();
-            }
-        });
-
+                }
+                break;
+        }
 
     }
 }
