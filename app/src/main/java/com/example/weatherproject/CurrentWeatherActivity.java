@@ -64,6 +64,8 @@ public class CurrentWeatherActivity extends AppCompatActivity {
 
 
         Button backButton = (Button) findViewById(R.id.backCurrent);
+        if(MainActivity.testingMode == 0)
+            backButton.setVisibility(View.GONE);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -131,7 +133,11 @@ public class CurrentWeatherActivity extends AppCompatActivity {
 //
 
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            Message.message(getApplicationContext(), "ERROR");
+//            Intent intent = new Intent(CurrentWeatherActivity.this, SelectProfileActivity.class);
+//            CurrentWeatherActivity.this.startActivity(intent);
+//            finish();
         }
 
 
@@ -142,6 +148,7 @@ public class CurrentWeatherActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CurrentWeatherActivity.this, AddEditProfileActivity.class);
+                intent.putExtra("ID_to_be_edited", -1);
                 CurrentWeatherActivity.this.startActivity(intent);
                 finish();
             }
@@ -153,6 +160,7 @@ public class CurrentWeatherActivity extends AppCompatActivity {
             public void onClick(View view) {
                 /***needs improvments*/
                 Intent intent = new Intent(CurrentWeatherActivity.this, AddEditProfileActivity.class);
+                intent.putExtra("ID_to_be_edited", ID_to_view);//to be updated
                 CurrentWeatherActivity.this.startActivity(intent);
                 finish();
             }

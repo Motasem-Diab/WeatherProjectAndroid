@@ -42,6 +42,38 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return sqLiteDatabase.rawQuery("SELECT * FROM PROFILE", null);
     }
 
+    public int getNumberOfRows(){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM PROFILE", null);
+        return cursor.getCount();
+    }
+
+    public long getDefaultProfileID(){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM PROFILE WHERE ISDEFAULT = 1", null);
+        if(cursor.getCount()>0){
+            cursor.moveToNext();
+            long x = cursor.getLong(0);
+            return x;
+        }
+        else
+            return -1;
+    }
+
+    public Cursor getCursorOfProfileID(long ID){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM PROFILE WHERE ID ="+ID, null);
+        cursor.moveToNext();
+        return cursor;
+    }
+
+    public long getSingleProfileID(){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM PROFILE", null);
+        cursor.moveToNext();
+        return cursor.getLong(0);
+    }
+
     public void deleteAll() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("delete from "+ "PROFILE");
@@ -52,6 +84,21 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE PROFILE SET ISDEFAULT = 0 ");
         db.execSQL("UPDATE PROFILE SET ISDEFAULT = 1 WHERE ID="+newID);
+        db.close();
+    }
+
+    public void updateProfile(long ID, String profile, String city, String api, String unit, boolean isDefault){
+        int def =0;
+        if(isDefault)
+            def=1;
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("UPDATE PROFILE SET PROFILE = \'"+profile
+                                    +"\' , CITY = \'"+city
+                                    +"\' , APIKEY = \'"+api
+                                    +"\' , UNIT = \'"+unit
+                                    +"\' , ISDEFAULT = "+def
+                                    +" WHERE ID="+ID);
+//        db.execSQL("UPDATE PROFILE SET PROFILE =\'" +profile+ "\' WHERE ID="+ID);
         db.close();
     }
 

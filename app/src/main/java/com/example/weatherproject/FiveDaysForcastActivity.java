@@ -59,6 +59,7 @@ public class FiveDaysForcastActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(FiveDaysForcastActivity.this, AddEditProfileActivity.class);
+                intent.putExtra("ID_to_be_edited", -1);//to be updated
                 FiveDaysForcastActivity.this.startActivity(intent);
                 finish();
             }
@@ -70,6 +71,7 @@ public class FiveDaysForcastActivity extends AppCompatActivity {
             public void onClick(View view) {
                 /***needs improvments*/
                 Intent intent = new Intent(FiveDaysForcastActivity.this, AddEditProfileActivity.class);
+                intent.putExtra("ID_to_be_edited", ID_to_view);//to be updated
                 FiveDaysForcastActivity.this.startActivity(intent);
                 finish();
             }
@@ -94,15 +96,17 @@ public class FiveDaysForcastActivity extends AppCompatActivity {
             }
         });
 
-//        Button backButton = (Button) findViewById(R.id.backCurrent);
-//        backButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(FiveDaysForcastActivity.this, MainActivity.class);
-//                FiveDaysForcastActivity.this.startActivity(intent);
-//                finish();
-//            }
-//        });
+        Button backButton = (Button) findViewById(R.id.backCurrent);
+        if(MainActivity.testingMode == 0)
+            backButton.setVisibility(View.GONE);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(FiveDaysForcastActivity.this, MainActivity.class);
+                FiveDaysForcastActivity.this.startActivity(intent);
+                finish();
+            }
+        });
 
 
     }

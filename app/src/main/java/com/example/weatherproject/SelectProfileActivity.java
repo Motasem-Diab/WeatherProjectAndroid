@@ -19,8 +19,6 @@ import java.util.ArrayList;
 
 public class SelectProfileActivity extends AppCompatActivity {
 
-//    String[] mobileArray = {"Android","IPhone","WindowsMobile","Blackberry",
-//            "WebOS","Ubuntu","Windows7","Max OS X","motasem","Raed","diab","ahjk","gjhkl"};
 
     DataBaseHelper dataBaseHelper =new DataBaseHelper(SelectProfileActivity.this,"myDB", null,1);
     ArrayList<String> arrayOfString = new ArrayList<String>();
@@ -51,7 +49,7 @@ public class SelectProfileActivity extends AppCompatActivity {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Message.message(getApplicationContext(),""+arrayOfString.get(position)+" is loaded now");
+//                Message.message(getApplicationContext(),""+arrayOfString.get(position)+" is loaded now");
                 //dataBaseHelper.resetAllDefaultExcept(arrayOfIDs.get(position));
                 //go to Current Weather Activity and send the pressed ID
                 Intent intent = new Intent(SelectProfileActivity.this, CurrentWeatherActivity.class);
