@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static int testingMode = 1;
+    public static int testingMode = 0;
 
     public static boolean firstRun = true;
     LinearLayout secondLinearLayout;
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(MainActivity.this, AddEditProfileActivity.class);
-                    intent.putExtra("ID_to_be_edited", -1);
+                    intent.putExtra("ID_to_be_edited", "-1");
                     MainActivity.this.startActivity(intent);
                     finish();
                 }

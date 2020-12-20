@@ -14,17 +14,18 @@ import android.widget.Spinner;
 
 
 public class AddEditProfileActivity extends AppCompatActivity {
-    public static long ID = 1;
+
     DataBaseHelper dataBaseHelper = new
             DataBaseHelper(AddEditProfileActivity.this, "myDB", null, 1);
-
+    public static long ID ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit_profile);
 
-        final long ID_to_edit = getIntent().getLongExtra("ID_to_be_edited", 1);
+        ID = dataBaseHelper.getNumberOfRows();
+        final long ID_to_edit = getIntent().getLongExtra("ID_to_be_edited", -1);
 
         String [] options = {"Celsius","Fahrenheit"};
         final Spinner unitSpinner =(Spinner) findViewById(R.id.unitSpinner);
@@ -99,6 +100,10 @@ public class AddEditProfileActivity extends AppCompatActivity {
                             checkBox.setChecked(false);
                         }
                     }
+                    //go ta main
+                    Intent intent = new Intent(AddEditProfileActivity.this, MainActivity.class);
+                    AddEditProfileActivity.this.startActivity(intent);
+                    finish();
                 }
             }
         });

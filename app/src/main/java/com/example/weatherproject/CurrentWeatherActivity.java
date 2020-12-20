@@ -42,7 +42,7 @@ public class CurrentWeatherActivity extends AppCompatActivity {
 
 
         //get the id to work on from SelectProfileActivity
-        final long ID_to_view = getIntent().getLongExtra("ID_to_be_viewd", 1);
+        final long ID_to_view = getIntent().getLongExtra("ID_to_be_viewd", 0);
         Cursor cursorById = dataBaseHelper.cursorByID(ID_to_view);
         //Get the values from DB
         String cityName = "", API = "", UNIT = "";
@@ -134,10 +134,10 @@ public class CurrentWeatherActivity extends AppCompatActivity {
 
         } catch (Exception e) {
 //            e.printStackTrace();
-            Message.message(getApplicationContext(), "ERROR");
-//            Intent intent = new Intent(CurrentWeatherActivity.this, SelectProfileActivity.class);
-//            CurrentWeatherActivity.this.startActivity(intent);
-//            finish();
+            Message.message(getApplicationContext(), "ERROR in profile,");
+            Intent intent = new Intent(CurrentWeatherActivity.this, SelectProfileActivity.class);
+            CurrentWeatherActivity.this.startActivity(intent);
+            finish();
         }
 
 
