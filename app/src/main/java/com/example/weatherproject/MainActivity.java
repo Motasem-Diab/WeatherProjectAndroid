@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static int testingMode = 0;
+    public static int testingMode = 0;//1=true, 0=false
 
     public static boolean firstRun = true;
     LinearLayout secondLinearLayout;
